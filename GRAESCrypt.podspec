@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "GRAESCrypt"
-  s.version      = "0.0.1"
+  s.version      = "1.0.1"
   s.summary      = "AES encode and decode for iOS"
   s.homepage     = "https://github.com/GreedBell/AESCrypt"
   s.license      = "MIT"
