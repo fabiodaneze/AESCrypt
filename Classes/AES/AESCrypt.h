@@ -31,7 +31,7 @@
 
 @interface AESCrypt : NSObject
 
-+ (NSString *)encrypt:(NSString *)message password:(NSString *)password;
-+ (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password;
++ (NSString *)encrypt:(NSString *)message password:(NSString *)password iv:(id)iv;
++ (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password iv:(id)iv;
 
 @end

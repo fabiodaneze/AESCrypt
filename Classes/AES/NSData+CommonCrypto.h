@@ -63,8 +63,8 @@ extern NSString * const kCommonCryptoErrorDomain;
 
 @interface NSData (CommonCryptor)
 
-- (NSData *) AES256EncryptedDataUsingKey: (id) key error: (NSError **) error;
-- (NSData *) decryptedAES256DataUsingKey: (id) key error: (NSError **) error;
+- (NSData *) AES256EncryptedDataUsingKey: (id) key iv: (id) iv error: (NSError **) error;
+- (NSData *) decryptedAES256DataUsingKey: (id) key iv: (id) iv error: (NSError **) error;
 
 - (NSData *) DESEncryptedDataUsingKey: (id) key error: (NSError **) error;
 - (NSData *) decryptedDESDataUsingKey: (id) key error: (NSError **) error;
