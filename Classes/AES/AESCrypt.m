@@ -61,6 +61,7 @@
      NSString *encryptedString = [[NSString alloc] initWithData:encryptedData encoding:NSUTF8StringEncoding];
      iv = [encryptedString substringToIndex:ivSize];
      encryptedString = [encryptedString substringFromIndex:ivSize];
+     encryptedData = [encryptedString dataUsingEncoding:NSUTF8StringEncoding];
   }
   NSData *decryptedData = [encryptedData decryptedAES256DataUsingKey:[[password dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] iv:iv error:nil];
   return [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
