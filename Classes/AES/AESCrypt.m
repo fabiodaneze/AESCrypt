@@ -35,14 +35,33 @@
 
 @implementation AESCrypt
 
-+ (NSString *)encrypt:(NSString *)message password:(NSString *)password iv:(id)iv {
++ (NSString *)encrypt:(NSString *)message password:(NSString *)password {
+  return [self encrypt:message password:password iv:nil];
+}
+
++ (NSString *)encrypt:(NSString *)message password:(NSString *)password iv:(NSString *)iv {
   NSData *encryptedData = [[message dataUsingEncoding:NSUTF8StringEncoding] AES256EncryptedDataUsingKey:[[password dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] iv:iv error:nil];
   NSString *base64EncodedString = [NSString base64StringFromData:encryptedData length:[encryptedData length]];
+  if (iv) {
+  	NSData *ivData = [iv dataUsingEncoding:NSUTF8StringEncoding];
+  	NSString *iv64 = [NSString base64StringFromData:ivData length:[ivData length]];
+  	base64EncodedString = [NSString stringWithFormat:@"%@%@", iv64, base64EncodedString];
+  }
   return base64EncodedString;
 }
 
-+ (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password iv:(id)iv {
++ (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password {
+	return [self decrypt:message password:password ivSize:0];
+}
+
++ (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password ivSize:(NSUInteger)ivSize {
   NSData *encryptedData = [NSData base64DataFromString:base64EncodedString];
+  NSString *iv;
+  if (ivSize > 0) {
+     NSString *encryptedString = [[NSString alloc] initWithData:encryptedData encoding:NSUTF8StringEncoding];
+     iv = [encryptedString substringToIndex:ivSize];
+     encryptedString = [encryptedString substringFromIndex:ivSize];
+  }
   NSData *decryptedData = [encryptedData decryptedAES256DataUsingKey:[[password dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] iv:iv error:nil];
   return [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
 }
