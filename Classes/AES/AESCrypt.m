@@ -51,7 +51,7 @@
 }
 
 + (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password {
-	return [self decrypt:message password:password ivSize:0];
+	return [self decrypt:base64EncodedString password:password ivSize:0];
 }
 
 + (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password ivSize:(NSUInteger)ivSize {
